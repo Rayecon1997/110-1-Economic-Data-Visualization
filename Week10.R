@@ -9,7 +9,7 @@ ggplot(
       y = 出口值到中國大陸,
       color = "出口值到中國大陸（千美元）"
     ),
-    size = 1
+    size = 1#input$size
   )+
   geom_line(
     data = dataset1,
@@ -71,8 +71,13 @@ ggplot(
   )+
   scale_x_continuous("年度", breaks = c(2009,2012,2014,2016,2018,2019,2020)
   )+
-  geom_vline(
-    xintercept = 2019,
+  geom_segment(
+    mapping = aes(
+      x = 2019,
+      xend = 2019,
+      y = -Inf,
+      yend =10000000*10.5,
+    ),
     color = "orange",
   )+
   geom_text(
@@ -81,6 +86,15 @@ ggplot(
       y=10000000*11,
       label="Covid-19"  
     ),
-    position = position_dodge(0.9),
+    position = "stack",
+    color = "Blue",
     size = 4,
+  )+
+  geom_rect(
+    mapping = aes(
+      xmin = 2019,
+      xmax = 2020,
+    ),
+    ymax = 10000000*10.5, ymin = -Inf,
+    alpha = 0.4,
   )
